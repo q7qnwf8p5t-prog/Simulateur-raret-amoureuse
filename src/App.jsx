@@ -8,7 +8,7 @@ Zap, TrendingDown, Search, Coffee, Wine, Check
 
 // ─── CONFIGURATION PUB & AFFILIATION ─────
 // Remplace par ton vrai ID AdSense et ton lien affilié
-const ADSENSE_CLIENT = "ca-pub-XXXXXXXXXXXXXXXXX"; // ← ton ID AdSense ici
+const ADSENSE_CLIENT = "ca-pub-7149920833436766"; // ← ton ID AdSense ici
 const AFFILIATE_URL = "https://www.meetic.fr"; // ← ton lien affilié ici (Meetic, Parship, etc.)
 const AFFILIATE_LABEL = "Meetic";
 
