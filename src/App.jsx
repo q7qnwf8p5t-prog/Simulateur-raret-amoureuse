@@ -7,9 +7,8 @@ import {
 } from "lucide-react";
 
 // ─── CONFIGURATION PUB & AFFILIATION ─────
-// Remplace par ton vrai ID AdSense et ton lien affilié
 const ADSENSE_CLIENT = "ca-pub-7149920833436766";
-const AFFILIATE_URL = "https://www.meetic.fr"; // ← ton lien affilié ici (Meetic, Parship, etc.)
+const AFFILIATE_URL = "https://www.meetic.fr"; 
 const AFFILIATE_LABEL = "Meetic";
 
 // Composant Google AdSense
@@ -103,13 +102,11 @@ const DATA = {
   },
   fumeur: { non: 0.68, occasionnel: 0.08, oui: 0.24 },
   sport: { jamais: 0.35, occasionnel: 0.30, regulier: 0.25, intensif: 0.10 },
-  // Religion (IFOP/INED surveys France)
   religion: {
     catholique: 0.29, musulman: 0.10, protestant: 0.02,
     juif: 0.008, bouddhiste: 0.005, orthodoxe: 0.01,
     autre_religion: 0.007, sans_religion: 0.51, spirituel: 0.05
   },
-  // Origine / apparence ethnique (INED TeO surveys, estimations France métropolitaine + DOM)
   origine: {
     europeenne: 0.72, maghrebine: 0.10, afro_caribbeenne: 0.06,
     subsaharienne: 0.04, asiatique: 0.03, metisse: 0.03,
@@ -178,7 +175,6 @@ const CITIES = [
   { name: "Sartrouville", dep: "78", pop: 52 }, { name: "Laval", dep: "53", pop: 52 },
   { name: "Évreux", dep: "27", pop: 48 }, { name: "Épinal", dep: "88", pop: 32 },
   { name: "Bastia", dep: "2B", pop: 48 }, { name: "Châteauroux", dep: "36", pop: 44 },
-  // DOM-TOM
   { name: "La Réunion", dep: "974", pop: 902, domtom: true },
   { name: "Guadeloupe", dep: "971", pop: 384, domtom: true },
   { name: "Martinique", dep: "972", pop: 355, domtom: true },
@@ -270,6 +266,20 @@ function getRarityAnalysis(count, pct, most) {
 }
 
 export default function App() {
+  // --- INJECTION SCRIPT ADSENSE ---
+  useEffect(() => {
+    const scriptId = "google-adsense-script";
+    if (!document.getElementById(scriptId)) {
+      const script = document.createElement("script");
+      script.id = scriptId;
+      script.src = `https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ADSENSE_CLIENT}`;
+      script.async = true;
+      script.crossOrigin = "anonymous";
+      document.head.appendChild(script);
+    }
+  }, []);
+  // --------------------------------
+
   const [phase, setPhase] = useState("intro");
   const [step, setStep] = useState(0);
   const [answers, setAnswers] = useState({});
