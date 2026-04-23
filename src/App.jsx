@@ -1,19 +1,19 @@
-import { useState, useEffect, useRef, useCallback } from “react”; 
+import { useState, useEffect, useRef, useCallback } from "react"; 
 import {
 Heart, Users, Ruler, Eye, Scissors, Dumbbell, GraduationCap, Cigarette,
 Baby, MapPin, ChevronLeft, Sparkles, Target,
 UserCircle, Flame, Brain, ArrowRight, RotateCcw,
 Zap, TrendingDown, Search, Coffee, Wine, Check
-} from “lucide-react”;
+} from "lucide-react";
 
 // ─── CONFIGURATION PUB & AFFILIATION ─────
 // Remplace par ton vrai ID AdSense et ton lien affilié
-const ADSENSE_CLIENT = “ca-pub-XXXXXXXXXXXXXXXXX”; // ← ton ID AdSense ici
-const AFFILIATE_URL = “https://www.meetic.fr”; // ← ton lien affilié ici (Meetic, Parship, etc.)
-const AFFILIATE_LABEL = “Meetic”;
+const ADSENSE_CLIENT = "ca-pub-XXXXXXXXXXXXXXXXX"; // ← ton ID AdSense ici
+const AFFILIATE_URL = "https://www.meetic.fr"; // ← ton lien affilié ici (Meetic, Parship, etc.)
+const AFFILIATE_LABEL = "Meetic";
 
 // Composant Google AdSense
-function AdBanner({ slot, format = “auto”, className = “” }) {
+function AdBanner({ slot, format = "auto", className = "" }) {
 const adRef = useRef(null);
 const pushed = useRef(false);
 useEffect(() => {
@@ -24,13 +24,13 @@ try { (window.adsbygoogle = window.adsbygoogle || []).push({}); } catch(e) {}
 }, []);
 return (
 <div className={`w-full flex justify-center ${className}`}>
-<ins className=“adsbygoogle”
+<ins className="adsbygoogle"
 ref={adRef}
-style={{ display: “block”, minHeight: 50 }}
+style={{ display: "block", minHeight: 50 }}
 data-ad-client={ADSENSE_CLIENT}
 data-ad-slot={slot}
 data-ad-format={format}
-data-full-width-responsive=“true” />
+data-full-width-responsive="true" />
 </div>
 );
 }
@@ -40,20 +40,20 @@ function AffiliateButton({ count }) {
 const msg = count > 100000
 ? `${count.toLocaleString("fr-FR")} personnes vous correspondent — lancez-vous !`
 : count > 10000
-? “Ils existent, il ne reste plus qu’à les trouver !”
+? "Ils existent, il ne reste plus qu'à les trouver !"
 : count > 1000
-? “Ils sont rares mais ils existent — allez à leur rencontre !”
+? "Ils sont rares mais ils existent — allez à leur rencontre !"
 : count > 100
-? “Quelques dizaines de perles rares vous attendent quelque part…”
+? "Quelques dizaines de perles rares vous attendent quelque part..."
 : count > 10
-? “Moins de 100 en France… chaque rencontre pourrait être la bonne !”
+? "Moins de 100 en France... chaque rencontre pourrait être la bonne !"
 : count > 0
-? “Ils se comptent sur les doigts d’une main — tentez votre chance !”
-: “Et si vous assoupliez un critère ? En attendant, explorez !”;
+? "Ils se comptent sur les doigts d'une main — tentez votre chance !"
+: "Et si vous assoupliez un critère ? En attendant, explorez !";
 return (
-<a href={AFFILIATE_URL} target=”_blank” rel=“noopener noreferrer sponsored”
-className=“block w-full mt-4 py-3.5 rounded-xl font-semibold text-white text-center text-sm overflow-hidden relative group”
-style={{ background: “linear-gradient(135deg, #f43f5e, #ec4899)”, boxShadow: “0 0 25px rgba(244,63,94,0.3)” }}>
+<a href={AFFILIATE_URL} target="_blank" rel="noopener noreferrer sponsored"
+className="block w-full mt-4 py-3.5 rounded-xl font-semibold text-white text-center text-sm overflow-hidden relative group"
+style={{ background: "linear-gradient(135deg, #f43f5e, #ec4899)", boxShadow: "0 0 25px rgba(244,63,94,0.3)" }}>
 <span className="relative z-10 flex items-center justify-center gap-2">
 <Search size={16} className="group-hover:scale-110 transition-transform" />
 {msg}
@@ -65,11 +65,11 @@ style={{ background: “linear-gradient(135deg, #f43f5e, #ec4899)”, boxShadow:
 // Lien affilié discret
 function AffiliateLink() {
 return (
-<a href={AFFILIATE_URL} target=”_blank” rel=“noopener noreferrer sponsored”
-className=“inline-flex items-center gap-1 text-xs mt-2 transition-colors”
-style={{ color: “rgba(236,72,153,0.5)” }}
-onMouseEnter={e => e.target.style.color = “rgba(236,72,153,0.8)”}
-onMouseLeave={e => e.target.style.color = “rgba(236,72,153,0.5)”}>
+<a href={AFFILIATE_URL} target="_blank" rel="noopener noreferrer sponsored"
+className="inline-flex items-center gap-1 text-xs mt-2 transition-colors"
+style={{ color: "rgba(236,72,153,0.5)" }}
+onMouseEnter={e => e.target.style.color = "rgba(236,72,153,0.8)"}
+onMouseLeave={e => e.target.style.color = "rgba(236,72,153,0.5)"}>
 <Heart size={10} /> Sponsorisé par {AFFILIATE_LABEL}
 </a>
 );
@@ -96,10 +96,10 @@ cheveux: { brun: 0.45, chatain: 0.25, blond: 0.18, roux: 0.04, noir: 0.06, gris_
 silhouette: { mince: 0.22, normale: 0.35, athletique: 0.15, ronde: 0.20, forte: 0.08 },
 diplome: { sans: 0.23, bac: 0.20, bac2: 0.15, bac3: 0.14, bac5: 0.22, doctorat: 0.06 },
 diplome_par_age_factor: {
-“18-24”: { bac5: 0.3, doctorat: 0.05 }, “25-29”: { bac5: 1.2, doctorat: 0.4 },
-“30-34”: { bac5: 1.3, doctorat: 0.8 }, “35-39”: { bac5: 1.1, doctorat: 1.0 },
-“40-49”: { bac5: 0.9, doctorat: 1.1 }, “50-59”: { bac5: 0.7, doctorat: 1.0 },
-“60+”: { bac5: 0.5, doctorat: 0.8 }
+"18-24": { bac5: 0.3, doctorat: 0.05 }, "25-29": { bac5: 1.2, doctorat: 0.4 },
+"30-34": { bac5: 1.3, doctorat: 0.8 }, "35-39": { bac5: 1.1, doctorat: 1.0 },
+"40-49": { bac5: 0.9, doctorat: 1.1 }, "50-59": { bac5: 0.7, doctorat: 1.0 },
+"60+": { bac5: 0.5, doctorat: 0.8 }
 },
 fumeur: { non: 0.68, occasionnel: 0.08, oui: 0.24 },
 sport: { jamais: 0.35, occasionnel: 0.30, regulier: 0.25, intensif: 0.10 },
@@ -117,79 +117,79 @@ moyen_orientale: 0.015, autre_origine: 0.005
 },
 enfants: { veut: 0.45, ne_veut_pas: 0.30, a_deja: 0.25 },
 enfants_par_age_factor: {
-“18-24”: { veut: 1.4, ne_veut_pas: 1.6, a_deja: 0.1 },
-“25-29”: { veut: 1.3, ne_veut_pas: 1.0, a_deja: 0.4 },
-“30-34”: { veut: 1.1, ne_veut_pas: 0.8, a_deja: 0.9 },
-“35-39”: { veut: 0.8, ne_veut_pas: 0.7, a_deja: 1.4 },
-“40-49”: { veut: 0.4, ne_veut_pas: 0.9, a_deja: 1.6 },
-“50-59”: { veut: 0.1, ne_veut_pas: 1.1, a_deja: 1.5 },
-“60+”: { veut: 0.05, ne_veut_pas: 1.2, a_deja: 1.4 }
+"18-24": { veut: 1.4, ne_veut_pas: 1.6, a_deja: 0.1 },
+"25-29": { veut: 1.3, ne_veut_pas: 1.0, a_deja: 0.4 },
+"30-34": { veut: 1.1, ne_veut_pas: 0.8, a_deja: 0.9 },
+"35-39": { veut: 0.8, ne_veut_pas: 0.7, a_deja: 1.4 },
+"40-49": { veut: 0.4, ne_veut_pas: 0.9, a_deja: 1.6 },
+"50-59": { veut: 0.1, ne_veut_pas: 1.1, a_deja: 1.5 },
+"60+": { veut: 0.05, ne_veut_pas: 1.2, a_deja: 1.4 }
 },
 };
 
 const CITIES = [
-{ name: “Paris”, dep: “75”, pop: 2133 }, { name: “Marseille”, dep: “13”, pop: 873 },
-{ name: “Lyon”, dep: “69”, pop: 522 }, { name: “Toulouse”, dep: “31”, pop: 504 },
-{ name: “Nice”, dep: “06”, pop: 342 }, { name: “Nantes”, dep: “44”, pop: 323 },
-{ name: “Montpellier”, dep: “34”, pop: 302 }, { name: “Strasbourg”, dep: “67”, pop: 290 },
-{ name: “Bordeaux”, dep: “33”, pop: 260 }, { name: “Lille”, dep: “59”, pop: 236 },
-{ name: “Rennes”, dep: “35”, pop: 225 }, { name: “Reims”, dep: “51”, pop: 182 },
-{ name: “Saint-Étienne”, dep: “42”, pop: 177 }, { name: “Le Havre”, dep: “76”, pop: 169 },
-{ name: “Toulon”, dep: “83”, pop: 176 }, { name: “Grenoble”, dep: “38”, pop: 158 },
-{ name: “Dijon”, dep: “21”, pop: 160 }, { name: “Angers”, dep: “49”, pop: 157 },
-{ name: “Nîmes”, dep: “30”, pop: 148 }, { name: “Villeurbanne”, dep: “69”, pop: 155 },
-{ name: “Clermont-Ferrand”, dep: “63”, pop: 147 }, { name: “Aix-en-Provence”, dep: “13”, pop: 145 },
-{ name: “Le Mans”, dep: “72”, pop: 144 }, { name: “Brest”, dep: “29”, pop: 139 },
-{ name: “Tours”, dep: “37”, pop: 138 }, { name: “Amiens”, dep: “80”, pop: 134 },
-{ name: “Limoges”, dep: “87”, pop: 130 }, { name: “Annecy”, dep: “74”, pop: 133 },
-{ name: “Perpignan”, dep: “66”, pop: 121 }, { name: “Boulogne-Billancourt”, dep: “92”, pop: 121 },
-{ name: “Metz”, dep: “57”, pop: 120 }, { name: “Besançon”, dep: “25”, pop: 120 },
-{ name: “Orléans”, dep: “45”, pop: 116 }, { name: “Rouen”, dep: “76”, pop: 115 },
-{ name: “Mulhouse”, dep: “68”, pop: 109 }, { name: “Caen”, dep: “14”, pop: 108 },
-{ name: “Nancy”, dep: “54”, pop: 105 }, { name: “Saint-Denis (93)”, dep: “93”, pop: 113 },
-{ name: “Argenteuil”, dep: “95”, pop: 110 }, { name: “Montreuil”, dep: “93”, pop: 109 },
-{ name: “Roubaix”, dep: “59”, pop: 99 }, { name: “Tourcoing”, dep: “59”, pop: 98 },
-{ name: “Dunkerque”, dep: “59”, pop: 87 }, { name: “Avignon”, dep: “84”, pop: 92 },
-{ name: “Nanterre”, dep: “92”, pop: 96 }, { name: “Créteil”, dep: “94”, pop: 93 },
-{ name: “Poitiers”, dep: “86”, pop: 90 }, { name: “Versailles”, dep: “78”, pop: 85 },
-{ name: “Courbevoie”, dep: “92”, pop: 84 }, { name: “Vitry-sur-Seine”, dep: “94”, pop: 94 },
-{ name: “Pau”, dep: “64”, pop: 78 }, { name: “Colombes”, dep: “92”, pop: 86 },
-{ name: “Aulnay-sous-Bois”, dep: “93”, pop: 86 }, { name: “Asnières-sur-Seine”, dep: “92”, pop: 88 },
-{ name: “Rueil-Malmaison”, dep: “92”, pop: 81 }, { name: “La Rochelle”, dep: “17”, pop: 80 },
-{ name: “Antibes”, dep: “06”, pop: 74 }, { name: “Saint-Maur-des-Fossés”, dep: “94”, pop: 77 },
-{ name: “Calais”, dep: “62”, pop: 73 }, { name: “Champigny-sur-Marne”, dep: “94”, pop: 78 },
-{ name: “Aubervilliers”, dep: “93”, pop: 87 }, { name: “Béziers”, dep: “34”, pop: 79 },
-{ name: “Bourges”, dep: “18”, pop: 66 }, { name: “Cannes”, dep: “06”, pop: 75 },
-{ name: “Saint-Nazaire”, dep: “44”, pop: 72 }, { name: “Colmar”, dep: “68”, pop: 70 },
-{ name: “Quimper”, dep: “29”, pop: 63 }, { name: “Valence”, dep: “26”, pop: 65 },
-{ name: “Drancy”, dep: “93”, pop: 72 }, { name: “Mérignac”, dep: “33”, pop: 73 },
-{ name: “Ajaccio”, dep: “2A”, pop: 73 }, { name: “Levallois-Perret”, dep: “92”, pop: 66 },
-{ name: “Troyes”, dep: “10”, pop: 62 }, { name: “Issy-les-Moulineaux”, dep: “92”, pop: 70 },
-{ name: “Noisy-le-Grand”, dep: “93”, pop: 69 }, { name: “Villeneuve-d’Ascq”, dep: “59”, pop: 63 },
-{ name: “Neuilly-sur-Seine”, dep: “92”, pop: 61 }, { name: “La Seyne-sur-Mer”, dep: “83”, pop: 65 },
-{ name: “Antony”, dep: “92”, pop: 63 }, { name: “Lorient”, dep: “56”, pop: 58 },
-{ name: “Sarcelles”, dep: “95”, pop: 59 }, { name: “Pessac”, dep: “33”, pop: 65 },
-{ name: “Ivry-sur-Seine”, dep: “94”, pop: 64 }, { name: “Cergy”, dep: “95”, pop: 67 },
-{ name: “Chambéry”, dep: “73”, pop: 60 }, { name: “Niort”, dep: “79”, pop: 60 },
-{ name: “Clichy”, dep: “92”, pop: 63 }, { name: “Montauban”, dep: “82”, pop: 62 },
-{ name: “Beauvais”, dep: “60”, pop: 57 }, { name: “Cholet”, dep: “49”, pop: 55 },
-{ name: “Saint-Quentin”, dep: “02”, pop: 54 }, { name: “Vannes”, dep: “56”, pop: 55 },
-{ name: “Charleville-Mézières”, dep: “08”, pop: 47 }, { name: “La Roche-sur-Yon”, dep: “85”, pop: 55 },
-{ name: “Sartrouville”, dep: “78”, pop: 52 }, { name: “Laval”, dep: “53”, pop: 52 },
-{ name: “Évreux”, dep: “27”, pop: 48 }, { name: “Épinal”, dep: “88”, pop: 32 },
-{ name: “Bastia”, dep: “2B”, pop: 48 }, { name: “Châteauroux”, dep: “36”, pop: 44 },
+{ name: "Paris", dep: "75", pop: 2133 }, { name: "Marseille", dep: "13", pop: 873 },
+{ name: "Lyon", dep: "69", pop: 522 }, { name: "Toulouse", dep: "31", pop: 504 },
+{ name: "Nice", dep: "06", pop: 342 }, { name: "Nantes", dep: "44", pop: 323 },
+{ name: "Montpellier", dep: "34", pop: 302 }, { name: "Strasbourg", dep: "67", pop: 290 },
+{ name: "Bordeaux", dep: "33", pop: 260 }, { name: "Lille", dep: "59", pop: 236 },
+{ name: "Rennes", dep: "35", pop: 225 }, { name: "Reims", dep: "51", pop: 182 },
+{ name: "Saint-Étienne", dep: "42", pop: 177 }, { name: "Le Havre", dep: "76", pop: 169 },
+{ name: "Toulon", dep: "83", pop: 176 }, { name: "Grenoble", dep: "38", pop: 158 },
+{ name: "Dijon", dep: "21", pop: 160 }, { name: "Angers", dep: "49", pop: 157 },
+{ name: "Nîmes", dep: "30", pop: 148 }, { name: "Villeurbanne", dep: "69", pop: 155 },
+{ name: "Clermont-Ferrand", dep: "63", pop: 147 }, { name: "Aix-en-Provence", dep: "13", pop: 145 },
+{ name: "Le Mans", dep: "72", pop: 144 }, { name: "Brest", dep: "29", pop: 139 },
+{ name: "Tours", dep: "37", pop: 138 }, { name: "Amiens", dep: "80", pop: 134 },
+{ name: "Limoges", dep: "87", pop: 130 }, { name: "Annecy", dep: "74", pop: 133 },
+{ name: "Perpignan", dep: "66", pop: 121 }, { name: "Boulogne-Billancourt", dep: "92", pop: 121 },
+{ name: "Metz", dep: "57", pop: 120 }, { name: "Besançon", dep: "25", pop: 120 },
+{ name: "Orléans", dep: "45", pop: 116 }, { name: "Rouen", dep: "76", pop: 115 },
+{ name: "Mulhouse", dep: "68", pop: 109 }, { name: "Caen", dep: "14", pop: 108 },
+{ name: "Nancy", dep: "54", pop: 105 }, { name: "Saint-Denis (93)", dep: "93", pop: 113 },
+{ name: "Argenteuil", dep: "95", pop: 110 }, { name: "Montreuil", dep: "93", pop: 109 },
+{ name: "Roubaix", dep: "59", pop: 99 }, { name: "Tourcoing", dep: "59", pop: 98 },
+{ name: "Dunkerque", dep: "59", pop: 87 }, { name: "Avignon", dep: "84", pop: 92 },
+{ name: "Nanterre", dep: "92", pop: 96 }, { name: "Créteil", dep: "94", pop: 93 },
+{ name: "Poitiers", dep: "86", pop: 90 }, { name: "Versailles", dep: "78", pop: 85 },
+{ name: "Courbevoie", dep: "92", pop: 84 }, { name: "Vitry-sur-Seine", dep: "94", pop: 94 },
+{ name: "Pau", dep: "64", pop: 78 }, { name: "Colombes", dep: "92", pop: 86 },
+{ name: "Aulnay-sous-Bois", dep: "93", pop: 86 }, { name: "Asnières-sur-Seine", dep: "92", pop: 88 },
+{ name: "Rueil-Malmaison", dep: "92", pop: 81 }, { name: "La Rochelle", dep: "17", pop: 80 },
+{ name: "Antibes", dep: "06", pop: 74 }, { name: "Saint-Maur-des-Fossés", dep: "94", pop: 77 },
+{ name: "Calais", dep: "62", pop: 73 }, { name: "Champigny-sur-Marne", dep: "94", pop: 78 },
+{ name: "Aubervilliers", dep: "93", pop: 87 }, { name: "Béziers", dep: "34", pop: 79 },
+{ name: "Bourges", dep: "18", pop: 66 }, { name: "Cannes", dep: "06", pop: 75 },
+{ name: "Saint-Nazaire", dep: "44", pop: 72 }, { name: "Colmar", dep: "68", pop: 70 },
+{ name: "Quimper", dep: "29", pop: 63 }, { name: "Valence", dep: "26", pop: 65 },
+{ name: "Drancy", dep: "93", pop: 72 }, { name: "Mérignac", dep: "33", pop: 73 },
+{ name: "Ajaccio", dep: "2A", pop: 73 }, { name: "Levallois-Perret", dep: "92", pop: 66 },
+{ name: "Troyes", dep: "10", pop: 62 }, { name: "Issy-les-Moulineaux", dep: "92", pop: 70 },
+{ name: "Noisy-le-Grand", dep: "93", pop: 69 }, { name: "Villeneuve-d'Ascq", dep: "59", pop: 63 },
+{ name: "Neuilly-sur-Seine", dep: "92", pop: 61 }, { name: "La Seyne-sur-Mer", dep: "83", pop: 65 },
+{ name: "Antony", dep: "92", pop: 63 }, { name: "Lorient", dep: "56", pop: 58 },
+{ name: "Sarcelles", dep: "95", pop: 59 }, { name: "Pessac", dep: "33", pop: 65 },
+{ name: "Ivry-sur-Seine", dep: "94", pop: 64 }, { name: "Cergy", dep: "95", pop: 67 },
+{ name: "Chambéry", dep: "73", pop: 60 }, { name: "Niort", dep: "79", pop: 60 },
+{ name: "Clichy", dep: "92", pop: 63 }, { name: "Montauban", dep: "82", pop: 62 },
+{ name: "Beauvais", dep: "60", pop: 57 }, { name: "Cholet", dep: "49", pop: 55 },
+{ name: "Saint-Quentin", dep: "02", pop: 54 }, { name: "Vannes", dep: "56", pop: 55 },
+{ name: "Charleville-Mézières", dep: "08", pop: 47 }, { name: "La Roche-sur-Yon", dep: "85", pop: 55 },
+{ name: "Sartrouville", dep: "78", pop: 52 }, { name: "Laval", dep: "53", pop: 52 },
+{ name: "Évreux", dep: "27", pop: 48 }, { name: "Épinal", dep: "88", pop: 32 },
+{ name: "Bastia", dep: "2B", pop: 48 }, { name: "Châteauroux", dep: "36", pop: 44 },
 // DOM-TOM
-{ name: “La Réunion”, dep: “974”, pop: 902, domtom: true },
-{ name: “Guadeloupe”, dep: “971”, pop: 384, domtom: true },
-{ name: “Martinique”, dep: “972”, pop: 355, domtom: true },
-{ name: “Guyane”, dep: “973”, pop: 295, domtom: true },
-{ name: “Mayotte”, dep: “976”, pop: 321, domtom: true },
-{ name: “Nouvelle-Calédonie”, dep: “988”, pop: 272, domtom: true },
-{ name: “Polynésie française”, dep: “987”, pop: 280, domtom: true },
-{ name: “Saint-Martin”, dep: “978”, pop: 32, domtom: true },
-{ name: “Saint-Barthélemy”, dep: “977”, pop: 11, domtom: true },
-{ name: “Saint-Pierre-et-Miquelon”, dep: “975”, pop: 6, domtom: true },
-{ name: “Wallis-et-Futuna”, dep: “986”, pop: 11, domtom: true },
+{ name: "La Réunion", dep: "974", pop: 902, domtom: true },
+{ name: "Guadeloupe", dep: "971", pop: 384, domtom: true },
+{ name: "Martinique", dep: "972", pop: 355, domtom: true },
+{ name: "Guyane", dep: "973", pop: 295, domtom: true },
+{ name: "Mayotte", dep: "976", pop: 321, domtom: true },
+{ name: "Nouvelle-Calédonie", dep: "988", pop: 272, domtom: true },
+{ name: "Polynésie française", dep: "987", pop: 280, domtom: true },
+{ name: "Saint-Martin", dep: "978", pop: 32, domtom: true },
+{ name: "Saint-Barthélemy", dep: "977", pop: 11, domtom: true },
+{ name: "Saint-Pierre-et-Miquelon", dep: "975", pop: 6, domtom: true },
+{ name: "Wallis-et-Futuna", dep: "986", pop: 11, domtom: true },
 ];
 
 // ─── HELPERS ─────
@@ -198,57 +198,57 @@ function gaussianRangeProb(lo, hi, m, s) { return Math.max(0.001, gaussianCDF(hi
 function gaussianPDF(x, m, s) { return (1/(s*Math.sqrt(2*Math.PI)))*Math.exp(-0.5*((x-m)/s)**2); }
 function interpolateCelibRate(age) { const pts=DATA.celibataire_by_age_continuous; if(age<=pts[0].age) return pts[0].rate; if(age>=pts[pts.length-1].age) return pts[pts.length-1].rate; for(let i=0;i<pts.length-1;i++){if(age>=pts[i].age&&age<=pts[i+1].age){const t=(age-pts[i].age)/(pts[i+1].age-pts[i].age);return pts[i].rate+t*(pts[i+1].rate-pts[i].rate);}} return 0.3; }
 function avgCelibRateForRange(a1, a2) { const{mean,std}=DATA.age_adult; let ws=0,tw=0; for(let a=a1;a<=a2;a++){const w=gaussianPDF(a,mean,std);ws+=interpolateCelibRate(a)*w;tw+=w;} return tw>0?ws/tw:0.3; }
-function ageRangeToKey(a1,a2) { const m=(a1+a2)/2; if(m<25)return”18-24”;if(m<30)return”25-29”;if(m<35)return”30-34”;if(m<40)return”35-39”;if(m<50)return”40-49”;if(m<60)return”50-59”;return”60+”; }
+function ageRangeToKey(a1,a2) { const m=(a1+a2)/2; if(m<25)return"18-24";if(m<30)return"25-29";if(m<35)return"30-34";if(m<40)return"35-39";if(m<50)return"40-49";if(m<60)return"50-59";return"60+"; }
 function sumProbs(dm, vals) { return vals.reduce((s,v)=>s+(dm[v]||0),0); }
 
 function AnimatedNumber({ value, duration = 1200 }) {
 const [display, setDisplay] = useState(value);
 const prev = useRef(value), frame = useRef(null);
 useEffect(() => { const from=prev.current,to=value; if(from===to)return; const st=performance.now(); const anim=(now)=>{const p=Math.min((now-st)/duration,1);setDisplay(Math.round(from+(to-from)*(1-Math.pow(1-p,4))));if(p<1)frame.current=requestAnimationFrame(anim);else prev.current=to;}; frame.current=requestAnimationFrame(anim); return()=>cancelAnimationFrame(frame.current); }, [value, duration]);
-return (<div className="flex items-center justify-center gap-1">{display.toLocaleString(“fr-FR”).split(””).map((c,i)=>(<span key={i} className={`inline-block ${c==="\u202F"||c===" "?"w-2":"w-[1.1em]"} text-center font-mono`} style={{textShadow:c!==” “&&c!==”\u202F”?“0 0 20px rgba(236,72,153,0.6), 0 0 40px rgba(168,85,247,0.3)”:“none”}}>{c}</span>))}</div>);
+return (<div className="flex items-center justify-center gap-1">{display.toLocaleString("fr-FR").split("").map((c,i)=>(<span key={i} className={`inline-block ${c==="\u202F"||c===" "?"w-2":"w-[1.1em]"} text-center font-mono`} style={{textShadow:c!==" "&&c!=="\u202F"?"0 0 20px rgba(236,72,153,0.6), 0 0 40px rgba(168,85,247,0.3)":"none"}}>{c}</span>))}</div>);
 }
 
-function ParticleBG() { return (<div className="fixed inset-0 overflow-hidden pointer-events-none" style={{zIndex:0}}>{Array.from({length:30}).map((_,i)=>(<div key={i} className=“absolute rounded-full” style={{width:`${2+Math.random()*3}px`,height:`${2+Math.random()*3}px`,left:`${Math.random()*100}%`,top:`${Math.random()*100}%`,background:i%3===0?”#ec4899”:i%3===1?”#a855f7”:”#6366f1”,opacity:0.15+Math.random()*0.2,animation:`float-particle ${8+Math.random()*12}s ease-in-out infinite`,animationDelay:`${-Math.random()*10}s`}}/>))}</div>); }
+function ParticleBG() { return (<div className="fixed inset-0 overflow-hidden pointer-events-none" style={{zIndex:0}}>{Array.from({length:30}).map((_,i)=>(<div key={i} className="absolute rounded-full" style={{width:`${2+Math.random()*3}px`,height:`${2+Math.random()*3}px`,left:`${Math.random()*100}%`,top:`${Math.random()*100}%`,background:i%3===0?"#ec4899":i%3===1?"#a855f7":"#6366f1",opacity:0.15+Math.random()*0.2,animation:`float-particle ${8+Math.random()*12}s ease-in-out infinite`,animationDelay:`${-Math.random()*10}s`}}/>))}</div>); }
 
 const STEPS = [
-{ id:“sexe”, title:“Quel genre recherchez-vous ?”, icon:Heart, category:“Base”, multi:true, options:[{value:“femme”,label:“Une femme”,icon:Heart},{value:“homme”,label:“Un homme”,icon:UserCircle},{value:“peu_importe”,label:“Peu importe”,icon:Sparkles}] },
-{ id:“orientation”, title:“Quelle orientation sexuelle ?”, icon:Flame, category:“Base”, multi:true, options:[{value:“hetero”,label:“Hétérosexuel(le)”,icon:Heart},{value:“homo”,label:“Homosexuel(le)”,icon:Heart},{value:“bi”,label:“Bisexuel(le)”,icon:Heart},{value:“peu_importe”,label:“Peu importe”,icon:Sparkles}] },
-{ id:“age”, title:“Quelle fourchette d’âge ?”, icon:Users, category:“Base”, type:“dual_slider_age” },
-{ id:“celibataire”, title:“Doit-il/elle être célibataire ?”, icon:Target, category:“Base”, options:[{value:“oui”,label:“Oui, absolument”,icon:Target},{value:“non”,label:“Peu importe”,icon:Users}] },
-{ id:“origine”, title:“Quelle origine / apparence ?”, icon:Users, category:“Physique”, multi:true, options:[{value:“europeenne”,label:“Européenne”},{value:“maghrebine”,label:“Maghrébine”},{value:“afro_caribbeenne”,label:“Afro-caribéenne”},{value:“subsaharienne”,label:“Subsaharienne”},{value:“asiatique”,label:“Asiatique”},{value:“metisse”,label:“Métisse”},{value:“moyen_orientale”,label:“Moyen-orientale”},{value:“autre_origine”,label:“Autre”},{value:“peu_importe”,label:“Peu importe”}] },
-{ id:“taille”, title:“Quelle fourchette de taille ?”, icon:Ruler, category:“Physique”, type:“dual_slider” },
-{ id:“yeux”, title:“Quelle couleur des yeux ?”, icon:Eye, category:“Physique”, multi:true, options:[{value:“marron”,label:“Marron”,color:”#8B4513”},{value:“bleu”,label:“Bleu”,color:”#4A90D9”},{value:“vert”,label:“Vert”,color:”#2E8B57”},{value:“noisette”,label:“Noisette”,color:”#C4A35A”},{value:“gris”,label:“Gris”,color:”#9CA3AF”},{value:“peu_importe”,label:“Peu importe”,color:null}] },
-{ id:“cheveux”, title:“Quelle couleur de cheveux ?”, icon:Scissors, category:“Physique”, multi:true, options:[{value:“brun”,label:“Brun”},{value:“chatain”,label:“Châtain”},{value:“blond”,label:“Blond”},{value:“roux”,label:“Roux”},{value:“noir”,label:“Noir”},{value:“gris_blanc”,label:“Gris / Blanc”},{value:“peu_importe”,label:“Peu importe”}] },
-{ id:“silhouette”, title:“Quel type de silhouette ?”, icon:Dumbbell, category:“Physique”, multi:true, options:[{value:“mince”,label:“Mince”},{value:“normale”,label:“Normale”},{value:“athletique”,label:“Athlétique”},{value:“ronde”,label:“Ronde”},{value:“forte”,label:“Forte”},{value:“peu_importe”,label:“Peu importe”}] },
-{ id:“religion”, title:“Quelle religion / croyance ?”, icon:Sparkles, category:“Style de vie”, multi:true, options:[{value:“catholique”,label:“Catholique”},{value:“musulman”,label:“Musulman(e)”},{value:“protestant”,label:“Protestant(e)”},{value:“juif”,label:“Juif / Juive”},{value:“bouddhiste”,label:“Bouddhiste”},{value:“orthodoxe”,label:“Orthodoxe”},{value:“autre_religion”,label:“Autre religion”},{value:“sans_religion”,label:“Sans religion”},{value:“spirituel”,label:“Spirituel(le)”},{value:“peu_importe”,label:“Peu importe”}] },
-{ id:“diplome”, title:“Quel niveau d’études minimum ?”, icon:GraduationCap, category:“Style de vie”, options:[{value:“sans”,label:“Peu importe”},{value:“bac”,label:“Bac”},{value:“bac2”,label:“Bac+2”},{value:“bac3”,label:“Bac+3/Licence”},{value:“bac5”,label:“Bac+5/Master”},{value:“doctorat”,label:“Doctorat”}] },
-{ id:“fumeur”, title:“Acceptez-vous un(e) fumeur(se) ?”, icon:Cigarette, category:“Style de vie”, options:[{value:“non”,label:“Non-fumeur uniquement”,icon:Zap},{value:“occasionnel”,label:“Occasionnel OK”,icon:Coffee},{value:“peu_importe”,label:“Peu importe”,icon:Wine}] },
-{ id:“sport”, title:“Pratique sportive souhaitée ?”, icon:Dumbbell, category:“Style de vie”, multi:true, options:[{value:“intensif”,label:“Sportif intense”},{value:“regulier”,label:“Régulier”},{value:“occasionnel”,label:“Occasionnel”},{value:“jamais”,label:“Pas sportif”},{value:“peu_importe”,label:“Peu importe”}] },
-{ id:“enfants”, title:“Concernant les enfants ?”, icon:Baby, category:“Style de vie”, multi:true, options:[{value:“veut”,label:“Veut des enfants”},{value:“ne_veut_pas”,label:“N’en veut pas”},{value:“a_deja”,label:“En a déjà”},{value:“peu_importe”,label:“Peu importe”}] },
-{ id:“region”, title:“Dans quelle ville cherchez-vous ?”, icon:MapPin, category:“Style de vie”, type:“city_search” }
+{ id:"sexe", title:"Quel genre recherchez-vous ?", icon:Heart, category:"Base", multi:true, options:[{value:"femme",label:"Une femme",icon:Heart},{value:"homme",label:"Un homme",icon:UserCircle},{value:"peu_importe",label:"Peu importe",icon:Sparkles}] },
+{ id:"orientation", title:"Quelle orientation sexuelle ?", icon:Flame, category:"Base", multi:true, options:[{value:"hetero",label:"Hétérosexuel(le)",icon:Heart},{value:"homo",label:"Homosexuel(le)",icon:Heart},{value:"bi",label:"Bisexuel(le)",icon:Heart},{value:"peu_importe",label:"Peu importe",icon:Sparkles}] },
+{ id:"age", title:"Quelle fourchette d'âge ?", icon:Users, category:"Base", type:"dual_slider_age" },
+{ id:"celibataire", title:"Doit-il/elle être célibataire ?", icon:Target, category:"Base", options:[{value:"oui",label:"Oui, absolument",icon:Target},{value:"non",label:"Peu importe",icon:Users}] },
+{ id:"origine", title:"Quelle origine / apparence ?", icon:Users, category:"Physique", multi:true, options:[{value:"europeenne",label:"Européenne"},{value:"maghrebine",label:"Maghrébine"},{value:"afro_caribbeenne",label:"Afro-caribéenne"},{value:"subsaharienne",label:"Subsaharienne"},{value:"asiatique",label:"Asiatique"},{value:"metisse",label:"Métisse"},{value:"moyen_orientale",label:"Moyen-orientale"},{value:"autre_origine",label:"Autre"},{value:"peu_importe",label:"Peu importe"}] },
+{ id:"taille", title:"Quelle fourchette de taille ?", icon:Ruler, category:"Physique", type:"dual_slider" },
+{ id:"yeux", title:"Quelle couleur des yeux ?", icon:Eye, category:"Physique", multi:true, options:[{value:"marron",label:"Marron",color:"#8B4513"},{value:"bleu",label:"Bleu",color:"#4A90D9"},{value:"vert",label:"Vert",color:"#2E8B57"},{value:"noisette",label:"Noisette",color:"#C4A35A"},{value:"gris",label:"Gris",color:"#9CA3AF"},{value:"peu_importe",label:"Peu importe",color:null}] },
+{ id:"cheveux", title:"Quelle couleur de cheveux ?", icon:Scissors, category:"Physique", multi:true, options:[{value:"brun",label:"Brun"},{value:"chatain",label:"Châtain"},{value:"blond",label:"Blond"},{value:"roux",label:"Roux"},{value:"noir",label:"Noir"},{value:"gris_blanc",label:"Gris / Blanc"},{value:"peu_importe",label:"Peu importe"}] },
+{ id:"silhouette", title:"Quel type de silhouette ?", icon:Dumbbell, category:"Physique", multi:true, options:[{value:"mince",label:"Mince"},{value:"normale",label:"Normale"},{value:"athletique",label:"Athlétique"},{value:"ronde",label:"Ronde"},{value:"forte",label:"Forte"},{value:"peu_importe",label:"Peu importe"}] },
+{ id:"religion", title:"Quelle religion / croyance ?", icon:Sparkles, category:"Style de vie", multi:true, options:[{value:"catholique",label:"Catholique"},{value:"musulman",label:"Musulman(e)"},{value:"protestant",label:"Protestant(e)"},{value:"juif",label:"Juif / Juive"},{value:"bouddhiste",label:"Bouddhiste"},{value:"orthodoxe",label:"Orthodoxe"},{value:"autre_religion",label:"Autre religion"},{value:"sans_religion",label:"Sans religion"},{value:"spirituel",label:"Spirituel(le)"},{value:"peu_importe",label:"Peu importe"}] },
+{ id:"diplome", title:"Quel niveau d'études minimum ?", icon:GraduationCap, category:"Style de vie", options:[{value:"sans",label:"Peu importe"},{value:"bac",label:"Bac"},{value:"bac2",label:"Bac+2"},{value:"bac3",label:"Bac+3/Licence"},{value:"bac5",label:"Bac+5/Master"},{value:"doctorat",label:"Doctorat"}] },
+{ id:"fumeur", title:"Acceptez-vous un(e) fumeur(se) ?", icon:Cigarette, category:"Style de vie", options:[{value:"non",label:"Non-fumeur uniquement",icon:Zap},{value:"occasionnel",label:"Occasionnel OK",icon:Coffee},{value:"peu_importe",label:"Peu importe",icon:Wine}] },
+{ id:"sport", title:"Pratique sportive souhaitée ?", icon:Dumbbell, category:"Style de vie", multi:true, options:[{value:"intensif",label:"Sportif intense"},{value:"regulier",label:"Régulier"},{value:"occasionnel",label:"Occasionnel"},{value:"jamais",label:"Pas sportif"},{value:"peu_importe",label:"Peu importe"}] },
+{ id:"enfants", title:"Concernant les enfants ?", icon:Baby, category:"Style de vie", multi:true, options:[{value:"veut",label:"Veut des enfants"},{value:"ne_veut_pas",label:"N'en veut pas"},{value:"a_deja",label:"En a déjà"},{value:"peu_importe",label:"Peu importe"}] },
+{ id:"region", title:"Dans quelle ville cherchez-vous ?", icon:MapPin, category:"Style de vie", type:"city_search" }
 ];
 
 function calculateCandidates(answers) {
 let pool = POPULATION_FRANCE;
 const factors = [];
 const getVals = (v) => Array.isArray(v) ? v : [v];
-const hasPeu = (v) => { const a = getVals(v); return a.includes(“peu_importe”); };
+const hasPeu = (v) => { const a = getVals(v); return a.includes("peu_importe"); };
 
-if (answers.sexe && !hasPeu(answers.sexe)) { const f=sumProbs(DATA.sexe,getVals(answers.sexe)); pool*=f; factors.push({name:“Genre”,factor:f}); }
-if (answers.orientation && !hasPeu(answers.orientation)) { const f=sumProbs(DATA.orientation,getVals(answers.orientation)); pool*=f; factors.push({name:“Orientation”,factor:f}); }
-if (answers.age_min!=null&&answers.age_max!=null) { const f=gaussianRangeProb(answers.age_min,answers.age_max,DATA.age_adult.mean,DATA.age_adult.std); pool*=f; factors.push({name:“Tranche d’âge”,factor:f}); }
-if (answers.celibataire===“oui”&&answers.age_min!=null) { const f=avgCelibRateForRange(answers.age_min,answers.age_max); pool*=f; factors.push({name:“Célibataire”,factor:f}); }
-if (answers.origine && !hasPeu(answers.origine)) { const f=sumProbs(DATA.origine,getVals(answers.origine)); pool*=f; factors.push({name:“Origine”,factor:f}); }
-if (answers.taille_min!=null&&answers.taille_max!=null) { const st=answers.sexe===“homme”||(!Array.isArray(answers.sexe)&&answers.sexe===“homme”)?DATA.taille_homme:answers.sexe===“femme”?DATA.taille_femme:{mean:(DATA.taille_homme.mean+DATA.taille_femme.mean)/2,std:Math.max(DATA.taille_homme.std,DATA.taille_femme.std)*1.2}; const f=gaussianRangeProb(answers.taille_min,answers.taille_max,st.mean,st.std); pool*=f; factors.push({name:“Taille”,factor:f}); }
-if (answers.yeux && !hasPeu(answers.yeux)) { const f=sumProbs(DATA.yeux,getVals(answers.yeux)); pool*=f; factors.push({name:“Couleur des yeux”,factor:f}); }
-if (answers.cheveux && !hasPeu(answers.cheveux)) { const f=sumProbs(DATA.cheveux,getVals(answers.cheveux)); pool*=f; factors.push({name:“Couleur des cheveux”,factor:f}); }
-if (answers.silhouette && !hasPeu(answers.silhouette)) { const f=sumProbs(DATA.silhouette,getVals(answers.silhouette)); pool*=f; factors.push({name:“Silhouette”,factor:f}); }
-if (answers.religion && !hasPeu(answers.religion)) { const f=sumProbs(DATA.religion,getVals(answers.religion)); pool*=f; factors.push({name:“Religion”,factor:f}); }
-if (answers.diplome&&answers.diplome!==“sans”) { const lv=[“sans”,“bac”,“bac2”,“bac3”,“bac5”,“doctorat”]; const idx=lv.indexOf(answers.diplome); const ak=answers.age_min!=null?ageRangeToKey(answers.age_min,answers.age_max):null; let f=0; for(let i=idx;i<lv.length;i++){let b=DATA.diplome[lv[i]];if(ak){const c=DATA.diplome_par_age_factor[ak]?.[lv[i]];if(c!==undefined)b*=c;}f+=b;} f=Math.min(f,0.95); pool*=f; factors.push({name:“Niveau d’études”,factor:f}); }
-if (answers.fumeur&&answers.fumeur!==“peu_importe”) { let f; if(answers.fumeur===“non”)f=DATA.fumeur.non;else if(answers.fumeur===“occasionnel”)f=DATA.fumeur.non+DATA.fumeur.occasionnel;else f=1; pool*=f; factors.push({name:“Tabac”,factor:f}); }
-if (answers.sport && !hasPeu(answers.sport)) { const f=sumProbs(DATA.sport,getVals(answers.sport)); pool*=f; factors.push({name:“Sport”,factor:f}); }
-if (answers.enfants && !hasPeu(answers.enfants)) { const vals=getVals(answers.enfants); const ak=answers.age_min!=null?ageRangeToKey(answers.age_min,answers.age_max):null; let f=0; for(const v of vals){let b=DATA.enfants[v]||0;if(ak){const c=DATA.enfants_par_age_factor[ak]?.[v];if(c!==undefined)b*=c;}f+=b;} f=Math.min(f,0.95); pool*=f; factors.push({name:“Enfants”,factor:f}); }
-if (answers.region&&answers.region!==“peu_importe”) { const city=CITIES.find(c=>c.name===answers.region); if(city){const f=city.pop/68000;pool*=f;factors.push({name:`Localisation (${city.name})`,factor:f});} }
+if (answers.sexe && !hasPeu(answers.sexe)) { const f=sumProbs(DATA.sexe,getVals(answers.sexe)); pool*=f; factors.push({name:"Genre",factor:f}); }
+if (answers.orientation && !hasPeu(answers.orientation)) { const f=sumProbs(DATA.orientation,getVals(answers.orientation)); pool*=f; factors.push({name:"Orientation",factor:f}); }
+if (answers.age_min!=null&&answers.age_max!=null) { const f=gaussianRangeProb(answers.age_min,answers.age_max,DATA.age_adult.mean,DATA.age_adult.std); pool*=f; factors.push({name:"Tranche d'âge",factor:f}); }
+if (answers.celibataire==="oui"&&answers.age_min!=null) { const f=avgCelibRateForRange(answers.age_min,answers.age_max); pool*=f; factors.push({name:"Célibataire",factor:f}); }
+if (answers.origine && !hasPeu(answers.origine)) { const f=sumProbs(DATA.origine,getVals(answers.origine)); pool*=f; factors.push({name:"Origine",factor:f}); }
+if (answers.taille_min!=null&&answers.taille_max!=null) { const st=answers.sexe==="homme"||(!Array.isArray(answers.sexe)&&answers.sexe==="homme")?DATA.taille_homme:answers.sexe==="femme"?DATA.taille_femme:{mean:(DATA.taille_homme.mean+DATA.taille_femme.mean)/2,std:Math.max(DATA.taille_homme.std,DATA.taille_femme.std)*1.2}; const f=gaussianRangeProb(answers.taille_min,answers.taille_max,st.mean,st.std); pool*=f; factors.push({name:"Taille",factor:f}); }
+if (answers.yeux && !hasPeu(answers.yeux)) { const f=sumProbs(DATA.yeux,getVals(answers.yeux)); pool*=f; factors.push({name:"Couleur des yeux",factor:f}); }
+if (answers.cheveux && !hasPeu(answers.cheveux)) { const f=sumProbs(DATA.cheveux,getVals(answers.cheveux)); pool*=f; factors.push({name:"Couleur des cheveux",factor:f}); }
+if (answers.silhouette && !hasPeu(answers.silhouette)) { const f=sumProbs(DATA.silhouette,getVals(answers.silhouette)); pool*=f; factors.push({name:"Silhouette",factor:f}); }
+if (answers.religion && !hasPeu(answers.religion)) { const f=sumProbs(DATA.religion,getVals(answers.religion)); pool*=f; factors.push({name:"Religion",factor:f}); }
+if (answers.diplome&&answers.diplome!=="sans") { const lv=["sans","bac","bac2","bac3","bac5","doctorat"]; const idx=lv.indexOf(answers.diplome); const ak=answers.age_min!=null?ageRangeToKey(answers.age_min,answers.age_max):null; let f=0; for(let i=idx;i<lv.length;i++){let b=DATA.diplome[lv[i]];if(ak){const c=DATA.diplome_par_age_factor[ak]?.[lv[i]];if(c!==undefined)b*=c;}f+=b;} f=Math.min(f,0.95); pool*=f; factors.push({name:"Niveau d'études",factor:f}); }
+if (answers.fumeur&&answers.fumeur!=="peu_importe") { let f; if(answers.fumeur==="non")f=DATA.fumeur.non;else if(answers.fumeur==="occasionnel")f=DATA.fumeur.non+DATA.fumeur.occasionnel;else f=1; pool*=f; factors.push({name:"Tabac",factor:f}); }
+if (answers.sport && !hasPeu(answers.sport)) { const f=sumProbs(DATA.sport,getVals(answers.sport)); pool*=f; factors.push({name:"Sport",factor:f}); }
+if (answers.enfants && !hasPeu(answers.enfants)) { const vals=getVals(answers.enfants); const ak=answers.age_min!=null?ageRangeToKey(answers.age_min,answers.age_max):null; let f=0; for(const v of vals){let b=DATA.enfants[v]||0;if(ak){const c=DATA.enfants_par_age_factor[ak]?.[v];if(c!==undefined)b*=c;}f+=b;} f=Math.min(f,0.95); pool*=f; factors.push({name:"Enfants",factor:f}); }
+if (answers.region&&answers.region!=="peu_importe") { const city=CITIES.find(c=>c.name===answers.region); if(city){const f=city.pop/68000;pool*=f;factors.push({name:`Localisation (${city.name})`,factor:f});} }
 
 const finalCount = Math.max(0, Math.round(pool));
 factors.sort((a,b)=>a.factor-b.factor);
@@ -257,20 +257,20 @@ return { finalCount, percentage: (finalCount/POPULATION_FRANCE)*100, factors, mo
 
 function getRarityAnalysis(count, pct, most) {
 let tier,emoji,message,color;
-if(count>500000){tier=“Commun”;emoji=“🌍”;color=”#22c55e”;message=“Votre idéal est assez répandu. Vous avez de bonnes chances de rencontrer cette personne !”;}
-else if(count>100000){tier=“Peu commun”;emoji=“💎”;color=”#3b82f6”;message=“Ce profil se fait plus rare, mais reste tout à fait trouvable dans une grande ville.”;}
-else if(count>10000){tier=“Rare”;emoji=“⭐”;color=”#a855f7”;message=“Vous cherchez quelqu’un de spécial. Ce profil est plus rare qu’un trèfle à quatre feuilles.”;}
-else if(count>1000){tier=“Très rare”;emoji=“🦄”;color=”#ec4899”;message=“Ce profil est un véritable spécimen. L’équivalent d’une perle dans un océan de coquillages.”;}
-else if(count>100){tier=“Ultra rare”;emoji=“💫”;color=”#f43f5e”;message=“Statistiquement, vous pourriez remplir un café avec tous vos candidats potentiels en France.”;}
-else if(count>10){tier=“Légendaire”;emoji=“🔥”;color=”#ef4444”;message=“Votre idéal est si rare qu’il/elle pourrait tenir dans un ascenseur. Littéralement.”;}
-else if(count>0){tier=“Mythique”;emoji=“👑”;color=”#fbbf24”;message=“Ce profil est presque une créature de légende. Vous comptez sur les doigts d’une main.”;}
-else{tier=“Impossible”;emoji=“🌌”;color=”#6366f1”;message=“Statistiquement, cette personne n’existe pas en France. Peut-être sur une autre planète ?”;}
-let elimText=””; if(most) elimText=`Le critère le plus sélectif : "${most.name}" (facteur ×${most.factor.toFixed(3)})`;
+if(count>500000){tier="Commun";emoji="🌍";color="#22c55e";message="Votre idéal est assez répandu. Vous avez de bonnes chances de rencontrer cette personne !";}
+else if(count>100000){tier="Peu commun";emoji="💎";color="#3b82f6";message="Ce profil se fait plus rare, mais reste tout à fait trouvable dans une grande ville.";}
+else if(count>10000){tier="Rare";emoji="⭐";color="#a855f7";message="Vous cherchez quelqu'un de spécial. Ce profil est plus rare qu'un trèfle à quatre feuilles.";}
+else if(count>1000){tier="Très rare";emoji="🦄";color="#ec4899";message="Ce profil est un véritable spécimen. L'équivalent d'une perle dans un océan de coquillages.";}
+else if(count>100){tier="Ultra rare";emoji="💫";color="#f43f5e";message="Statistiquement, vous pourriez remplir un café avec tous vos candidats potentiels en France.";}
+else if(count>10){tier="Légendaire";emoji="🔥";color="#ef4444";message="Votre idéal est si rare qu'il/elle pourrait tenir dans un ascenseur. Littéralement.";}
+else if(count>0){tier="Mythique";emoji="👑";color="#fbbf24";message="Ce profil est presque une créature de légende. Vous comptez sur les doigts d'une main.";}
+else{tier="Impossible";emoji="🌌";color="#6366f1";message="Statistiquement, cette personne n'existe pas en France. Peut-être sur une autre planète ?";}
+let elimText=""; if(most) elimText=`Le critère le plus sélectif : "${most.name}" (facteur ×${most.factor.toFixed(3)})`;
 return {tier,emoji,message,color,elimText};
 }
 
 export default function App() {
-const [phase, setPhase] = useState(“intro”);
+const [phase, setPhase] = useState("intro");
 const [step, setStep] = useState(0);
 const [answers, setAnswers] = useState({});
 const [currentPool, setCurrentPool] = useState(POPULATION_FRANCE);
@@ -279,7 +279,7 @@ const [sliderMin, setSliderMin] = useState(155);
 const [sliderMax, setSliderMax] = useState(185);
 const [ageSliderMin, setAgeSliderMin] = useState(25);
 const [ageSliderMax, setAgeSliderMax] = useState(35);
-const [citySearch, setCitySearch] = useState(””);
+const [citySearch, setCitySearch] = useState("");
 const [multiSel, setMultiSel] = useState([]);
 
 const cs = STEPS[step];
@@ -289,72 +289,72 @@ const commitAnswer = useCallback((value) => {
 if (animating) return;
 setAnimating(true);
 let na;
-if (cs.id===“taille”) na={…answers,taille_min:value.min,taille_max:value.max};
-else if (cs.id===“age”) na={…answers,age_min:value.min,age_max:value.max};
-else na={…answers,[cs.id]:value};
+if (cs.id==="taille") na={...answers,taille_min:value.min,taille_max:value.max};
+else if (cs.id==="age") na={...answers,age_min:value.min,age_max:value.max};
+else na={...answers,[cs.id]:value};
 setAnswers(na);
 setCurrentPool(calculateCandidates(na).finalCount);
-setTimeout(()=>{setAnimating(false);setMultiSel([]);if(step<STEPS.length-1)setStep(step+1);else setPhase(“result”);},800);
+setTimeout(()=>{setAnimating(false);setMultiSel([]);if(step<STEPS.length-1)setStep(step+1);else setPhase("result");},800);
 },[animating,answers,cs,step]);
 
 const toggleMulti = useCallback((v) => {
-if (v===“peu_importe”) { commitAnswer(“peu_importe”); return; }
-setMultiSel(p=>p.includes(v)?p.filter(x=>x!==v):[…p,v]);
+if (v==="peu_importe") { commitAnswer("peu_importe"); return; }
+setMultiSel(p=>p.includes(v)?p.filter(x=>x!==v):[...p,v]);
 },[commitAnswer]);
 
 const goBack = () => {
-if(step>0){const na={…answers};const pid=STEPS[step-1].id;if(pid===“taille”){delete na.taille_min;delete na.taille_max;}else if(pid===“age”){delete na.age_min;delete na.age_max;}else delete na[pid];if(pid===“region”)setCitySearch(””);setAnswers(na);setMultiSel([]);setCurrentPool(calculateCandidates(na).finalCount);setStep(step-1);}
+if(step>0){const na={...answers};const pid=STEPS[step-1].id;if(pid==="taille"){delete na.taille_min;delete na.taille_max;}else if(pid==="age"){delete na.age_min;delete na.age_max;}else delete na[pid];if(pid==="region")setCitySearch("");setAnswers(na);setMultiSel([]);setCurrentPool(calculateCandidates(na).finalCount);setStep(step-1);}
 };
 
 const restart = () => {
-setPhase(“intro”);setStep(0);setAnswers({});setCurrentPool(POPULATION_FRANCE);
+setPhase("intro");setStep(0);setAnswers({});setCurrentPool(POPULATION_FRANCE);
 setSliderMin(155);setSliderMax(185);setAgeSliderMin(25);setAgeSliderMax(35);
-setCitySearch(””);setMultiSel([]);
+setCitySearch("");setMultiSel([]);
 };
 
-const result = phase===“result”?calculateCandidates(answers):null;
+const result = phase==="result"?calculateCandidates(answers):null;
 const rarity = result?getRarityAnalysis(result.finalCount,result.percentage,result.mostEliminating):null;
 
 const sexeVals = answers.sexe ? (Array.isArray(answers.sexe) ? answers.sexe : [answers.sexe]) : [];
-const isMaleOnly = sexeVals.length===1 && sexeVals[0]===“homme”;
-const isFemaleOnly = sexeVals.length===1 && sexeVals[0]===“femme”;
+const isMaleOnly = sexeVals.length===1 && sexeVals[0]==="homme";
+const isFemaleOnly = sexeVals.length===1 && sexeVals[0]==="femme";
 const tailleStats = isMaleOnly ? DATA.taille_homme : isFemaleOnly ? DATA.taille_femme : {mean:(DATA.taille_homme.mean+DATA.taille_femme.mean)/2, std:Math.max(DATA.taille_homme.std,DATA.taille_femme.std)*1.2};
 const TMin=130,TMax=230;
 const tailleProb = gaussianRangeProb(sliderMin,sliderMax,tailleStats.mean,tailleStats.std);
 const gp=[]; for(let x=TMin;x<=TMax;x++) gp.push({x,y:gaussianPDF(x,tailleStats.mean,tailleStats.std)});
-const mPDF = Math.max(…gp.map(p=>p.y));
+const mPDF = Math.max(...gp.map(p=>p.y));
 
 const AMin=18,AMax=99,aS=DATA.age_adult;
 const ageProb = gaussianRangeProb(ageSliderMin,ageSliderMax,aS.mean,aS.std);
 const agp=[]; for(let a=AMin;a<=AMax;a++) agp.push({x:a,y:gaussianPDF(a,aS.mean,aS.std)});
-const amPDF = Math.max(…agp.map(p=>p.y));
+const amPDF = Math.max(...agp.map(p=>p.y));
 
-const norm = s=>s.normalize(“NFD”).replace(/[\u0300-\u036f]/g,””).toLowerCase();
+const norm = s=>s.normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase();
 const fCities = citySearch.length>0?CITIES.filter(c=>norm(c.name).includes(norm(citySearch))).slice(0,12):CITIES.slice(0,12);
 const domCities = CITIES.filter(c=>c.domtom), metroCities = CITIES.filter(c=>!c.domtom);
 
 const renderCurve = (pts,my,sMin,sMax,aMin,aMax,mean,gid) => (
-<svg width=“100%” height=“80” viewBox={`${aMin} 0 ${aMax-aMin} 80`} preserveAspectRatio=“none”>
+<svg width="100%" height="80" viewBox={`${aMin} 0 ${aMax-aMin} 80`} preserveAspectRatio="none">
 <defs><linearGradient id={gid} x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stopColor="#a855f7" stopOpacity="0.4"/><stop offset="100%" stopColor="#a855f7" stopOpacity="0"/></linearGradient></defs>
-<path d={`M ${aMin} 80 ${pts.map(p=>`L ${p.x} ${80-(p.y/my)*70}`).join(" ")} L ${aMax} 80 Z`} fill={`url(#${gid})`} opacity=“0.3”/>
-<path d={pts.map((p,i)=>`${i===0?"M":"L"} ${p.x} ${80-(p.y/my)*70}`).join(” “)} fill=“none” stroke=“rgba(168,85,247,0.3)” strokeWidth=“1”/>
-<path d={`M ${Math.max(aMin,sMin)} 80 ${pts.filter(p=>p.x>=sMin&&p.x<=sMax).map(p=>`L ${p.x} ${80-(p.y/my)*70}`).join(" ")} L ${Math.min(aMax,sMax)} 80 Z`} fill=“rgba(236,72,153,0.25)”/>
-<path d={pts.filter(p=>p.x>=sMin&&p.x<=sMax).map((p,i)=>`${i===0?"M":"L"} ${p.x} ${80-(p.y/my)*70}`).join(” “)} fill=“none” stroke=”#ec4899” strokeWidth=“1.5”/>
+<path d={`M ${aMin} 80 ${pts.map(p=>`L ${p.x} ${80-(p.y/my)*70}`).join(" ")} L ${aMax} 80 Z`} fill={`url(#${gid})`} opacity="0.3"/>
+<path d={pts.map((p,i)=>`${i===0?"M":"L"} ${p.x} ${80-(p.y/my)*70}`).join(" ")} fill="none" stroke="rgba(168,85,247,0.3)" strokeWidth="1"/>
+<path d={`M ${Math.max(aMin,sMin)} 80 ${pts.filter(p=>p.x>=sMin&&p.x<=sMax).map(p=>`L ${p.x} ${80-(p.y/my)*70}`).join(" ")} L ${Math.min(aMax,sMax)} 80 Z`} fill="rgba(236,72,153,0.25)"/>
+<path d={pts.filter(p=>p.x>=sMin&&p.x<=sMax).map((p,i)=>`${i===0?"M":"L"} ${p.x} ${80-(p.y/my)*70}`).join(" ")} fill="none" stroke="#ec4899" strokeWidth="1.5"/>
 <line x1={mean} y1="5" x2={mean} y2="80" stroke="rgba(255,255,255,0.15)" strokeWidth="0.5" strokeDasharray="2,2"/>
 </svg>
 );
 
 const renderDual = (min,max,aMin,aMax,setMin,setMax) => (
 <div className="relative h-10 mb-1">
-<div className=“absolute top-4 left-0 right-0 h-1.5 rounded-full” style={{background:“rgba(255,255,255,0.06)”}}/>
-<div className=“absolute top-4 h-1.5 rounded-full” style={{left:`${((min-aMin)/(aMax-aMin))*100}%`,right:`${100-((max-aMin)/(aMax-aMin))*100}%`,background:“linear-gradient(90deg, #ec4899, #a855f7)”}}/>
-<input type=“range” min={aMin} max={aMax} value={min} onChange={e=>{const v=+e.target.value;if(v<max-1)setMin(v);}} className=“absolute top-0 left-0 w-full h-10 appearance-none bg-transparent pointer-events-none” style={{zIndex:min>aMax-10?5:3,WebkitAppearance:“none”}}/>
-<input type=“range” min={aMin} max={aMax} value={max} onChange={e=>{const v=+e.target.value;if(v>min+1)setMax(v);}} className=“absolute top-0 left-0 w-full h-10 appearance-none bg-transparent pointer-events-none” style={{zIndex:4,WebkitAppearance:“none”}}/>
+<div className="absolute top-4 left-0 right-0 h-1.5 rounded-full" style={{background:"rgba(255,255,255,0.06)"}}/>
+<div className="absolute top-4 h-1.5 rounded-full" style={{left:`${((min-aMin)/(aMax-aMin))*100}%`,right:`${100-((max-aMin)/(aMax-aMin))*100}%`,background:"linear-gradient(90deg, #ec4899, #a855f7)"}}/>
+<input type="range" min={aMin} max={aMax} value={min} onChange={e=>{const v=+e.target.value;if(v<max-1)setMin(v);}} className="absolute top-0 left-0 w-full h-10 appearance-none bg-transparent pointer-events-none" style={{zIndex:min>aMax-10?5:3,WebkitAppearance:"none"}}/>
+<input type="range" min={aMin} max={aMax} value={max} onChange={e=>{const v=+e.target.value;if(v>min+1)setMax(v);}} className="absolute top-0 left-0 w-full h-10 appearance-none bg-transparent pointer-events-none" style={{zIndex:4,WebkitAppearance:"none"}}/>
 </div>
 );
 
 return (
-<div className=“min-h-screen relative overflow-hidden” style={{background:“linear-gradient(145deg, #0a0a0f 0%, #0d0518 30%, #120a24 60%, #0a0a0f 100%)”,fontFamily:”‘Outfit’, sans-serif”}}>
+<div className="min-h-screen relative overflow-hidden" style={{background:"linear-gradient(145deg, #0a0a0f 0%, #0d0518 30%, #120a24 60%, #0a0a0f 100%)",fontFamily:"'Outfit', sans-serif"}}>
 <style>{`@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@200;300;400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap'); @keyframes float-particle{0%,100%{transform:translateY(0) translateX(0)}25%{transform:translateY(-30px) translateX(10px)}50%{transform:translateY(-10px) translateX(-15px)}75%{transform:translateY(-40px) translateX(5px)}} @keyframes slide-up{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}} @keyframes fade-in{from{opacity:0}to{opacity:1}} @keyframes count-pulse{0%{transform:scale(1)}50%{transform:scale(1.03)}100%{transform:scale(1)}} @keyframes shimmer{0%{background-position:-200% center}100%{background-position:200% center}} @keyframes glow-ring{0%,100%{box-shadow:0 0 15px rgba(236,72,153,0.3),0 0 30px rgba(168,85,247,0.15)}50%{box-shadow:0 0 25px rgba(236,72,153,0.5),0 0 50px rgba(168,85,247,0.25)}} .slide-up{animation:slide-up .5s cubic-bezier(.16,1,.3,1) forwards} .fade-in{animation:fade-in .4s ease forwards} .count-pulse{animation:count-pulse .6s ease} .glow-ring{animation:glow-ring 3s ease-in-out infinite} .option-btn{transition:all .25s cubic-bezier(.16,1,.3,1);border:1px solid rgba(168,85,247,0.15);background:rgba(255,255,255,0.03);backdrop-filter:blur(10px)} .option-btn:hover{border-color:rgba(236,72,153,0.5);background:rgba(236,72,153,0.08);transform:translateY(-2px);box-shadow:0 8px 25px rgba(236,72,153,0.15),0 0 0 1px rgba(236,72,153,0.2)} .option-btn:active{transform:translateY(0) scale(0.98)} .option-btn.selected{border-color:rgba(236,72,153,0.7);background:linear-gradient(135deg,rgba(236,72,153,0.15),rgba(168,85,247,0.1));box-shadow:0 0 20px rgba(236,72,153,0.2),inset 0 0 20px rgba(236,72,153,0.05)} .neon-text{background:linear-gradient(135deg,#ec4899,#a855f7,#6366f1);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text} .shimmer-text{background:linear-gradient(90deg,#ec4899,#a855f7,#ec4899);background-size:200% auto;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:shimmer 3s linear infinite} input[type=range]{-webkit-appearance:none;background:transparent} input[type=range]::-webkit-slider-track{height:6px;border-radius:3px;background:transparent} input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:24px;height:24px;border-radius:50%;background:linear-gradient(135deg,#ec4899,#a855f7);border:2px solid #1a0a2e;cursor:pointer;box-shadow:0 0 15px rgba(236,72,153,0.5);pointer-events:all} .result-card{background:linear-gradient(145deg,rgba(15,5,30,0.95),rgba(10,10,20,0.95));border:1px solid rgba(168,85,247,0.2);box-shadow:0 0 60px rgba(236,72,153,0.1),0 0 120px rgba(168,85,247,0.05)} .factor-bar{transition:width 1s cubic-bezier(.16,1,.3,1)} ::-webkit-scrollbar{width:4px}::-webkit-scrollbar-track{background:transparent}::-webkit-scrollbar-thumb{background:rgba(168,85,247,0.3);border-radius:2px}`}</style>
 <ParticleBG/>
 <div className="relative z-10 min-h-screen flex flex-col items-center justify-center px-4 py-8">
