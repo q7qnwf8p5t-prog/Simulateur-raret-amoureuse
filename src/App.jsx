@@ -359,7 +359,6 @@ return (
 <ParticleBG/>
 <div className="relative z-10 min-h-screen flex flex-col items-center justify-center px-4 py-8">
 
-```
     {phase==="intro"&&(
       <div className="text-center max-w-lg slide-up">
         <div className="mb-6 relative inline-block"><div className="w-20 h-20 rounded-full flex items-center justify-center glow-ring" style={{background:"linear-gradient(135deg,rgba(236,72,153,0.15),rgba(168,85,247,0.15))"}}><Heart size={36} color="#ec4899"/></div></div>
@@ -542,7 +541,6 @@ return (
     )}
   </div>
 </div>
-```
 
 );
 }
